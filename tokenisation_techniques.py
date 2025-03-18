@@ -10,7 +10,17 @@ sentences = nltk.sent_tokenize(text)
 print(f"the tokenized sentences are = {sentences}")
 
 
-processed_text = nltk.word_tokenize(text.lower())
-print(f"the tokenized words are = {processed_text}")
+# Process the text : tokenization, only alphanumeric,lowercase, no stopwords
+def process_text(text):
+    processed_text = nltk.word_tokenize(text.lower())
+    processed_text = [word for word in processed_text if word.isalnum()]
+    processed_text = [
+        word
+        for word in processed_text
+        if word not in nltk.corpus.stopwords.words("english")
+    ]
 
-processed_text = [word for word in processed_text if word.isalnum()]
+    return processed_text
+
+
+print(f"the tokenized words are = {process_text(text)}")
